@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGI Security Dashboard</title>
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <link rel="stylesheet" href="css/styles.css">
+
+
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+
+    <!-- JSZip for Excel Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <!-- pdfmake for PDF Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.min.js"></script>
+
+</head>
+<body>
+    <header>
+        <i class="material-icons menu-icon">menu</i>
+        <img src="images/logo_vulnotify.jpeg" alt="Logo" class="header-logo">
+        <h1>CGI - VulNotify</h1>
+        <a href="settings.html" class="header-settings-icon">
+            <i class="material-icons">settings</i>
+        </a>
+    </header>
+    <aside id="sidebar">
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="material-icons">home</i> Home</a></li>
+                <li><a href="dashboard.html" class="active"><i class="material-icons">dashboard</i> Dashboard</a></li>
+                <li><a href="system.html"><i class="material-icons">memory</i> Systems</a></li>
+                <li><a href="vulnerabilities.html"><i class="material-icons">warning</i> Vulnerabilities</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main>
+        <!-- Tabs Header -->
+        <div class="tabs-header">
+            <div class="tabs">
+                <ul class="tab-links">
+                    <li><a href="#cveOverview" class="tab-button active">CVE Overview</a></li>
+                    <li><a href="#logsOverview" class="tab-button">Logs</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- End Tabs Header -->
+
+        <section class="dashboard-section">
+            <div id="cveOverview" class="tab-pane active">
+                <h2>CVE List</h2>
+                <div id="cveListSection">
+                    <form id="filterForm" class="filter-form">
+                        <label for="severityFilter">Severity:</label>
+                        <select id="severityFilter">
+                            <option value="">All</option>
+                            <option value="LOW">Low</option>
+                            <option value="MEDIUM">Medium</option>
+                            <option value="HIGH">High</option>
+                            <option value="CRITICAL">Critical</option>
+                        </select>
+
+                        <label for="dateRangeFilter">Date Range:</label>
+                        <select id="dateRangeFilter">
+                            <option value="">Select Range</option>
+                            <option value="1">1 day</option>
+                            <option value="2">2 days</option>
+                            <option value="3">3 days</option>
+                            <option value="7">1 week</option>
+                        </select>
+
+                        <label for="keywordFilter">Keyword:</label>
+                        <input type="text" id="keywordFilter" placeholder="Enter keyword">
+
+                        <label>
+                            <input type="checkbox" id="excludeResolved"> Exclude Resolved
+                        </label>
+
+                        <button type="submit">Apply Filters</button>
+                        <button type="button" id="clearFiltersBtn">Clear Filters</button>
+                    </form>
+                    <div id="totalResults">Total Results: 0</div>
+                    </button>
+                    <div id="cveListContainer">
+                        <table id="cveList" class="display nowrap" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>CVE ID</th>
+                                    <th>Product Name</th>
+                                    <th>Description</th>
+                                    <th>Base Severity</th>
+                                    <th>Published Date</th>
+                                    <th>URL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- CVE list will be filled in here via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="logsOverview" class="tab-pane">
+                <h2>Refresh Logs</h2>
+                <table id="refreshLogsTable" class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Logs will be populated here via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© CGI Nederland - Security Dashboard</p>
+    </footer>
+    <script src="/js/menu.js"></script>
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

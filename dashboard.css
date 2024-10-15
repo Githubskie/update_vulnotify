@@ -1,0 +1,784 @@
+#cveList {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Voeg deze regel toe */
+}
+
+#cveListContainer {
+    max-height: 1000px; /* Stel de maximale hoogte van de container in */
+    overflow-y: auto; /* Maak de container scrollbaar */
+}
+
+#cveList thead {
+    background-color: #3caccb;
+    position: sticky; /* Zorg ervoor dat de header blijft plakken */
+    top: 0; /* Plak aan de bovenkant van de container */
+    z-index: 1; /* Zorg ervoor dat de header boven de inhoud blijft */
+}
+
+main {
+    transition: margin-left 0.3s ease;
+    margin-left: 250px;
+    padding: 20px;
+    padding-top: 80px;
+}
+
+#cveList tbody tr {
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}
+
+.cve-row {
+    cursor: pointer;
+}
+
+.cve-details {
+    display: none;
+}
+
+.cve-details.hidden {
+    display: none;
+}
+
+.cve-details:not(.hidden) {
+    display: table-row;
+}
+
+.cve-details td {
+    padding: 10px;
+    background: #f9f9f9;
+}
+
+.cve-details div {
+    padding: 10px;
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+}
+
+/* Minimalistic filter form styles */
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filter-form label {
+    margin: 0 5px 0 0;
+}
+
+.filter-form input[type="text"],
+.filter-form select {
+    padding: 5px;
+    margin: 0 5px 0 0;
+}
+
+.filter-form button {
+    padding: 5px 10px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.filter-form button:hover {
+    background-color: #1976D2;
+}
+
+.filter-form input[type="checkbox"] {
+    margin-left: 10px;
+}
+
+.dashboard-header {
+    background-color: #3caccb;
+    color: white;
+}
+
+.dashboard-section {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 0 0 5px 5px;
+    background: #fff;
+}
+
+h2 {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #595959;
+    font-weight: 500;
+    border-bottom: 2px solid #595959;
+    padding-bottom: 5px;
+}
+
+
+.system-button {
+    display: inline-block;
+    width: calc(30% - 10px);
+    margin: 5px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    text-align: left;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.system-button:hover {
+    border-color: #888;
+}
+
+.system-button.selected {
+    background-color: #3caccb;
+    color: #fff;
+    border-color: #3caccb;
+}
+
+.hidden {
+    display: none;
+}
+
+.more-btn {
+    color: blue;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.toggle-software {
+    padding: 5px 10px;
+    background-color: #333333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 10px;
+    outline: none;
+}
+
+.toggle-software:hover {
+    background-color: #3caccb;
+}
+
+.software-list {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.software-entry {
+    margin-bottom: 5px;
+}
+
+.software-entry input {
+    margin-right: 5px;
+    width: calc(50% - 5px);
+}
+
+.collapse-content {
+    position: relative;
+    overflow-y: auto;
+    max-height: 400px;
+    padding-bottom: 20px;
+}
+
+#systemListContainer {
+    position: relative;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+
+.add-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.add-icon:hover {
+    color: #3caccb;
+}
+
+.static-actions {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    background: transparent;
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.add-button {
+    margin-right: 10px;
+    background-color: #3caccb;
+    color: white;
+}
+
+.add-button:hover {
+    background-color: #3caccb;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center children */
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ccc;
+}
+
+.system-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.system-form input, .system-form button {
+    padding: 8px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    flex: 1;
+    min-width: 120px;
+}
+
+.add-button {
+    background-color: #3caccb;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.add-button i {
+    margin-left: 8px;
+}
+
+.collapse-content {
+    overflow: hidden;
+    transition: max-height 0.2s ease-out, opacity 0.2s ease-out;
+    max-height: 0;
+    opacity: 0;
+    display: none;
+}
+
+.collapse-content.active {
+    max-height: 800px;
+    opacity: 1;
+    display: block;
+}
+
+
+.group-form, .system-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.group-form input, .system-form input {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    width: auto;
+    max-width: 400px;
+}
+
+.group-form label, .system-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.action-icon {
+    visibility: hidden;
+    cursor: pointer;
+    color: var(--text-dark);
+}
+
+.system-row.selected .action-icon {
+    visibility: visible;
+}
+
+.system-row {
+    transition: background-color 0.3s;
+}
+
+.system-row .action-icon {
+    visibility: hidden;
+    color: var(--text-dark);
+    cursor: pointer;
+}
+
+.system-row.selected .action-icon {
+    visibility: visible;
+}
+
+.system-row:hover {
+    background-color: #e0f0ff;
+}
+
+.system-row.selected {
+    background-color: #3caccb;
+    color: white;
+}
+
+tr.selected .action-icon {
+    visibility: visible;
+}
+
+#actionButtons {
+    display: flex;
+    display: none;
+    align-items: top;
+    visibility: hidden;
+}
+
+#actionButtons i {
+    cursor: pointer;
+    color: #3caccb;
+    margin-left: 10px;
+    font-size: 24px;
+}
+
+#actionButtons i:hover {
+    color: #3caccb;
+}
+
+#actionButtons i.show {
+    visibility: visible; /* Toon bij selectie */
+}
+
+.action-icon {
+    cursor: pointer;
+    color: var(--text-dark); /* Pas deze variabele aan naar je thema kleuren */
+    margin: 0 5px;
+}
+
+
+.systems-form {
+    padding: 20px;
+    background-color: #ffffff;
+    margin: 20px;
+}
+
+.systems-list {
+    margin-top: 20px;
+}
+
+.systems-entry {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.form-container, .list-container {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.list-container {
+    max-height: 2000px;
+}
+
+#addSystemContainer {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    transition: max-height 0.2s ease-out;
+    max-height: 0;
+    overflow: hidden;
+}
+
+#addSystemContainer.active {
+    max-height: 800px;
+}
+
+.welcome-section {
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+.collapse-content {
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    max-height: 800px;
+}
+
+.collapsed {
+    max-height: 0;
+}
+
+.collapse-content:not(.collapsed) + #actionButtons {
+    display: block;
+}
+
+.action-icon.edit {
+    color: #333333;
+}
+
+.action-icon.delete {
+    color: #333333;
+}
+
+.collapse-header {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+
+}.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+}
+
+.styled-table thead tr {
+    background-color: #3caccb;
+    color: white;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    background-color: #ffffff;
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #000000;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #000000;
+}
+
+.styled-table > thead > tr > th {
+    background-color: #333333;
+    color: white;
+}
+
+
+.system-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.system-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.system-form input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+}
+
+.submit-btn {
+    background-color: #3caccb;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+}
+]
+
+.styled-table tbody tr.selected {
+    background-color: #3caccb;
+    color: white;
+}
+
+.styled-table tbody tr:hover {
+    cursor: pointer;
+}
+
+#groupList {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+#groupList li {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+
+.system-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.system-form input, .system-form button {
+    padding: 8px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    flex: 1;
+    min-width: 120px;
+}
+
+.loading-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading-spinner {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+    margin-top: 20px;
+    color: #fff;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+}
+/* Tabs Header */
+.tabs-header {
+    margin: 10; /* Ruimte boven en onder de tabs */
+    position: relative; /* Voor positionering van de refresh knop */
+}
+
+
+/* Tabs Container */
+.tabs {
+    margin-bottom: 8px; /* Ruimte onder tabs */
+}
+
+/* Tab Links */
+.tab-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+/* Tab Buttons */
+.tab-button {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-bottom: 1px solid transparent;
+    padding: 8px 16px;
+    margin-right: 2px;
+
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 5px 5px 0 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none; /* Zorgt ervoor dat de tabs geen onderlijn hebben */
+    color: #000; /* Kleur van de tekst in de tab */
+}
+
+/* Hover Effect voor Tab Buttons */
+.tab-button:hover {
+    background: #e0e0e0; /* Verander de achtergrondkleur bij hover */
+}
+
+/* Actieve Tab Button */
+.tab-button.active {
+    background: #fff; /* Zorg ervoor dat de achtergrond wit is */
+    border-bottom: 1px solid #fff; /* Zorg ervoor dat de onderrand van de actieve tab wit is */
+    color: #000; /* Zorg ervoor dat de tekst zwart is */
+    font-weight: bold; /* Maak de tekst vetgedrukt om de actieve tab te accentueren */
+}
+
+/* Niet-actieve Tab Button */
+.tab-button:not(.active) {
+    background: #e0e0e0;
+    color: #666;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Tab Content */
+.tab-content {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 0 0 5px 5px;
+    background: #fff;
+}
+
+/* Tab Panes */
+.tab-pane {
+    display: none;
+}
+
+/* Actieve Tab Pane */
+.tab-pane.active {
+    display: block;
+}
+
+/* Specifieke tabs-header styling */
+main .tabs-header .tab-links .tab-button {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-bottom: 1px solid transparent;
+    padding: 8px 16px;
+    margin-right: 2px;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 5px 5px 0 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Zorg ervoor dat de tab buttons geen ongewilde stijlen hebben */
+main .tabs-header .tab-links .tab-button:hover, .tab-button.active,
+main .tabs-header .tab-links .tab-button:not(.active) {
+    background: #e0e0e0;
+}
+
+
+/* Minimalistic filter form styles */
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filter-form label {
+    margin: 0 5px 0 0;
+}
+
+.filter-form input[type="text"],
+.filter-form select {
+    padding: 5px;
+    margin: 0 5px 0 0;
+}
+
+.filter-form button {
+    padding: 5px 10px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.filter-form button:hover {
+    background-color: #1976D2;
+}
+
+.filter-form input[type="checkbox"] {
+    margin-left: 10px;
+}
+
+.loading-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading-spinner {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+    margin-top: 20px;
+    color: #fff;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+}
+
+.refresh-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.refresh-btn i {
+    font-size: 36px;
+    color: #333;
+}
+
+.refresh-btn:hover i {
+    color: #3caccb;
+}
